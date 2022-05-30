@@ -1,0 +1,29 @@
+{
+  "name": "ms-dashboard",
+  "version": "1.0.0",
+  "description": "## What is CodeIgniter?",
+  "main": "/dev/custom_scripts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoeWebDev96/MS-Dashboard.git"
+  },
+  "author": "Joe Hopping",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoeWebDev96/MS-Dashboard/issues"
+  },
+  "homepage": "https://github.com/JoeWebDev96/MS-Dashboard#readme",
+  "devDependencies": {
+    "fs": "0.0.1-security",
+    "gulp": "^4.0.2",
+    "gulp-append-prepend": "^1.0.8",
+    "gulp-clean": "^0.4.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify": "^3.1.0",
+    "gulp-print": "^5.0.2",
+    "gulp-sass": "^4.1.0"
+  }
+}

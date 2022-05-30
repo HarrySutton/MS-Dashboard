@@ -1,0 +1,9 @@
+node_modules
+writable/session/*
+writable/logs/*
+writable/debugbar/*
+!writable/session/index.html
+!writable/logs/index.html
+!writable/debugbar/index.html
+app/Config/App.php
+app/Config/Database.php

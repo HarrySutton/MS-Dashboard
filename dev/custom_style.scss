@@ -1,0 +1,375 @@
+$ms-orange:     #f47920;
+$ms-yellow:     #ebb000;
+$ms-grey:       #e6e6e6;
+$ms-dark:       #343a40;
+$ms-black:      #000;
+$ms-white:      #fff;
+
+body{
+    background-color: $ms-grey;
+    color: $ms-black;
+}
+
+.container, .container-sm, .container-md, .container-lg, .container-xl{
+    padding-top: 30px;
+    padding-bottom: 50px;
+    background-color: $ms-white;
+}
+
+button, input[type="submit"]{
+    height: 35px;
+    background-color: $ms-dark;
+    color: $ms-white;
+    border: none;
+    padding: 5px 20px;
+    &:hover{
+        background-color: $ms-orange;
+        color: $ms-white;
+    }
+    &:disabled{
+        background-color: $ms-grey;
+    }
+}
+
+.message{
+    padding: 5px 10px;
+    text-align: center;
+    background-color: $ms-yellow;
+
+    &.holrequest{
+        text-align: left;
+    }
+} 
+
+.row{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.dot-{
+    
+    &on{
+        height: 12px;
+        width: 12px;
+        box-shadow: 0px 0px 6px 2px green;
+        background-color: green;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    &off{
+        height: 12px;
+        width: 12px;
+        box-shadow: 0px 0px 6px 2px red;
+        background-color: #d60000;
+        border-radius: 50%;
+        display: inline-block;
+    }
+    
+}
+
+// ---- Page Structure ----
+
+.page-header{
+    h2{
+        width: 100%;
+    }
+    button{
+        margin: 5px 5px 15px 0px;
+    }
+}
+
+.page-body{
+
+}
+
+// ---- Default Table ----
+
+table{
+    thead{
+        border: 1px solid $ms-dark;
+        background-color: $ms-dark;
+        color: $ms-white;
+        th{
+            padding: 5px;
+        }
+    }
+    tbody{
+        border: 1px solid $ms-grey;
+        tr{
+            border-top: 2px solid $ms-grey;
+
+            td{
+                border: 1px solid $ms-grey;
+                padding: 5px;
+            } 
+        }
+        
+    }
+
+    
+}
+
+.table-holapproval{
+
+    tbody{
+        tr{
+            th{
+                text-align: center;
+            }
+            td{
+                cursor: pointer;
+            }
+        }
+
+        
+    }
+
+}
+
+// ---- Spinner ----- 
+
+.spinner-wrap{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    .spinner-bg{
+        height: 35px;
+        width: 35px;
+        background-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        padding: 6.5px;
+
+        .spinner-border{
+            border: .25em solid $ms-dark;
+            border-right-color: transparent;
+            height: 20px;
+            width: 20px;
+        }
+    }
+    .spinner-text{
+        padding-left: 20px;
+        font-weight: 700;
+        color: $ms-dark;
+        animation: fadeIn 0.75s infinite alternate;
+    }
+}
+
+// ---- Nav ----- 
+
+#motd{
+    width: 100%;
+    background-color: $ms-yellow;
+    padding: 4px;
+    font-weight: 500px;
+    text-align: center;
+}
+
+// ---- Login ----- 
+
+.login-box{
+    h2{
+        margin-bottom: 30px;
+    }
+    background-color: $ms-white;
+    margin: 40px auto 20px auto;
+    width: 100%;
+    max-width: 500px;
+    padding: 30px 20px;
+    border: 3px solid $ms-orange;
+
+    #loginMessage{
+        margin-top: 20px;
+    }
+}
+
+// ---- Modal -------
+
+.modal{
+    label{
+        margin-bottom: 0px;
+    }
+    button{
+        background-color: $ms-dark;
+        border: none;
+        padding: 5px 15px;
+        &:hover{
+            background-color: $ms-orange;
+        }
+    }
+
+}
+
+// ----- Holiday----- 
+
+.hol-allow-wrap{
+    #allowance-loader{
+        margin: 30px auto 0px auto;
+        width: fit-content;
+    }
+    .hol-allow{
+        width: 100%;
+        margin: 15px 0px 25px 0px;
+        tbody{
+            border: 0px;
+            tr{border: 0px;}
+            td{border: 0px;}
+        }
+    }
+}
+
+.holallowinput{
+    min-width: 60px;
+}
+
+.hol-cal-wrap{
+    #calendar-wrap{
+        min-height: 360px;
+        margin-bottom: 10px;
+        #calendar-loader{
+            padding-top: 62px;
+            margin: 0px auto 0px auto;
+            width: fit-content;
+        }
+    }
+
+    ul {list-style-type: none;}
+
+    // Top part
+    .month{
+        padding: 25px 25px;
+        width: 100%;
+        background: $ms-dark;
+        border-bottom: $ms-orange 5px solid;
+        text-align: center;
+        ul{
+            margin: 0;
+            padding: 0;
+            li{
+                color: white;
+                font-size: 20px;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+            }
+        }
+
+        .prev{
+            cursor: pointer;
+            float: left;
+        }
+        .next{
+            cursor: pointer;
+            float: right;
+        }
+        .prev:hover{
+            color: $ms-orange;
+        }
+        .next:hover{
+            color: $ms-orange;
+        }
+    }
+
+    // Week days
+    .weekdays{
+        margin: 0;
+        padding: 10px 0;
+        background-color: #ddd;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: flex-start;
+        li{
+            display: inline-block;
+            width: 14.2%;
+            color: #666;
+            text-align: center;
+        }
+    }
+
+    // Indevisual Days
+    .days{
+        padding: 0px 0px 10px 0px;
+        background: #eee;
+        margin: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: flex-start;
+
+        li{
+            list-style-type: none;
+            display: inline-block;
+            padding: 5px;
+            width: 14.2%;
+            height: 30px;
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 15px;
+            color: $ms-black;
+        }
+        .active{
+            background-color: $ms-orange;
+            font-weight: 600;
+            &.am{
+                background: linear-gradient(135deg, $ms-orange 50%, transparent 50%);
+            }
+            &.pm{
+                background: linear-gradient(135deg, transparent 50%, $ms-orange 50%);
+            }
+        }
+        .active:hover{
+            color: $ms-white;
+            cursor: pointer;
+        }
+        .pending{
+            background: $ms-yellow;
+            font-weight: 600;
+            &.am{
+                background: linear-gradient(135deg, $ms-yellow 50%, transparent 50%);
+            }
+            &.pm{
+                background: linear-gradient(135deg, transparent 50%, $ms-yellow 50%);
+            }
+        }
+    }
+}
+
+.weekly-overview-table{
+    width: 100%;
+    tbody{
+        tr{
+            td{
+                padding: 15px;
+
+                &.date{
+                    width: 30%;
+                }
+                ul{
+                    padding: unset;
+                    margin: unset;
+                }
+            }
+        }
+    }
+}
+
+/* Add media queries for smaller screens */
+// @media screen and (max-width:720px) {
+//     .hol-cal-wrap .weekdays li, .hol-cal-wrap .days li {width: 13.1%;}
+// }
+
+// @media screen and (max-width: 420px) {
+// .weekdays li, .days li {width: 12.5%;}
+//     .hol-cal-wrap .days li .active {padding: 2px;}
+// }
+
+// @media screen and (max-width: 290px) {
+//     .hol-cal-wrap .weekdays li, .hol-cal-wrap .days li {width: 12.2%;}
+// } 

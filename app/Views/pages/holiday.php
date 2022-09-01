@@ -116,12 +116,23 @@
 
 
                     <div class="form-group">
-                        <label for="InputUsername">From:</label>
+                        <label id="to-from" for="InputUsername">Date:</label>
                         <input id="holFrom" type="date" class="form-control" id="InputUsername">
                     </div>
                     <div class="form-group form-check">
-                        <input id="from_halfday" type="checkbox" class="form-check-input">
-                        <label class="form-check-label" for="from_halfday">Half day</label>
+
+                        <label class="form-check-label" for="from_halfday">
+                            <input id="from_halfday" type="checkbox" class="form-check-input">
+                            Half day
+                        </label>   
+
+                        <br>
+
+                        <label class="form-check-label" for="multi_day">
+                            <input id="multi_day" type="checkbox" class="form-check-input">
+                            Multiple days
+                        </label>  
+
                     </div>
                     <div id="from-time-select" class="form-group" style="display:none;">
                         <label for="InputUsername">Time:</label>
@@ -134,24 +145,29 @@
 
                     <hr>
 
-                    <div class="form-group">
-                        <label for="InputUsername">To:</label>
-                        <input id="holTo" type="date" class="form-control" id="InputUsername">
-                    </div>
-                    <div class="form-group form-check">
-                        <input id="to_halfday" type="checkbox" class="form-check-input">
-                        <label class="form-check-label" for="to_halfday">Half day</label>
-                    </div>
-                    <div id="to-time-select" class="form-group" style="display:none;">
-                        <label for="InputUsername">Time:</label>
-                        <select id="holToTime" class="form-control">
-                            <option value="AD">All Day</option>
-                            <option value="AM">AM</option>
-                            <option value="PM">PM</option>
-                        </select>
+                    <div id="from-group" style="display: none;">
+                        <div class="form-group">
+                            <label for="InputUsername">To:</label>
+                            <input id="holTo" type="date" class="form-control" id="InputUsername">
+                        </div>
+                        <div class="form-group form-check">
+                            <input id="to_halfday" type="checkbox" class="form-check-input">
+                            <label class="form-check-label" for="to_halfday">Half day</label>
+                        </div>
+                        <div id="to-time-select" class="form-group" style="display:none;">
+                            <label for="InputUsername">Time:</label>
+                            <select id="holToTime" class="form-control">
+                                <option value="AD">All Day</option>
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </div>
+
+                        <hr>
+
                     </div>
 
-                    <hr>
+
 
                     <div class="form-group">
                         <label for="InputUsername">Reference:</label>

@@ -323,6 +323,9 @@ table{
             &.pm{
                 background: linear-gradient(135deg, transparent 50%, $ms-orange 50%);
             }
+            &.weekend{
+                background-color: #666;
+            }
         }
         .active:hover{
             color: $ms-white;

@@ -31,7 +31,7 @@ if(!function_exists("createBooking")){
         }else if (isFull($db, $date, $time)){
             return 5;
 
-        } else {
+        }else {
             $name   = ($behalf)? $name  : "NULL";
             $email  = ($behalf)? $email : "NULL";
             $behalf = ($behalf)? 1 : 0;
@@ -40,11 +40,7 @@ if(!function_exists("createBooking")){
                     (bookingid, userID, bookingDate, bookingTime, bookingBehalf, bookingExtraName, bookingExtraEmail) 
                     VALUES (NULL, $user->userID, '$date', $time, $behalf, '$name', '$email');";
 
-            if ($db->query($sql)) {
-                return 0;
-            } else {
-                return 1;
-            }
+            return ($db->query($sql))? 0 : 1;
         }
     }
 }
@@ -262,14 +258,6 @@ if(!function_exists("getNextMonday")){
         return getMonday(date('Y-m-d', strtotime($date) + 604800));
     }
 } 
-
-// FINDS IF THE GIVEN DATE IS ON A WEEKEND
-if(!function_exists("isWeekend")){
-    function isWeekend($date)
-    {
-        return date("N", strtotime($date)) >= 6;
-    }
-}
 
 // FINDS IF THE GIVEN DATE IS BEFORE TODAY'S DATE
 if(!function_exists("isPast")){

@@ -69,7 +69,11 @@ class Holiday extends BaseController{
             // check selected year***
             $allowance = $db->table('holidayallowance');
             $allowance = $allowance->getWhere(['userID' => $userID, 'holallowYear' => $post['allowYear']]);
-            if($allowance->connID->affected_rows == 0){$output['error'] = ms_error(1);break;}
+
+            // if($allowance->connID->affected_rows == 0){
+            //     $output['error'] = ms_error(1);break;
+            // }
+
             $allowance = $allowance->getRow();
 
             // Get users requested holidays
@@ -221,8 +225,13 @@ class Holiday extends BaseController{
             elseif(date('N', $givenDate) == 5){$weekFri = date('Y-m-d', $givenDate);}
             
             $requests = $db->table('holidayrequests');
-            $requests->where('holFrom BETWEEN "'.$weekMon.'" AND "'.$weekFri.'"');
-            $requests->where('holTo BETWEEN "'.$weekMon.'" AND "'.$weekFri.'"');
+            // $requests->where('holFrom BETWEEN "'.$weekMon.'" AND "'.$weekFri.'"');
+            // $requests->where('holTo BETWEEN "'.$weekMon.'" AND "'.$weekFri.'"');
+            $requests->where('
+                holFrom BETWEEN "'.$weekMon.'" AND "'.$weekFri.'" OR 
+                holTo   BETWEEN "'.$weekMon.'" AND "'.$weekFri.'" OR 
+                holFrom < "'.$weekMon.'" AND holTo > "'.$weekFri.'"
+            ');
             $weekreq = $requests->get();
             $weekreq = $weekreq->getResult();
 
@@ -232,24 +241,22 @@ class Holiday extends BaseController{
 
             foreach($weekreq as $req){
                 if($req->holFromTime == "AD"){$req->holFromTime = "";}
-                if($req->holToTime == "AD"){$req->holToTime = "";}
+                if($req->holToTime   == "AD"){$req->holToTime   = "";}
 
-                $req->holFrom = "<strong>".$dates['weekdays'][date('N', strtotime($req->holFrom))]." ".$req->holFromTime."</strong><br>".date('d&\n\b\s\p;F', strtotime($req->holFrom));
-                $req->holTo = "<strong>".$dates['weekdays'][date('N', strtotime($req->holTo))]." ".$req->holFromTime."</strong><br>".date('d&\n\b\s\p;F', strtotime($req->holTo));
+                $req->holFrom = "<strong>".$dates['weekdays'][date('N', strtotime($req->holFrom ))]." ".$req->holFromTime."</strong><br>".date('d&\n\b\s\p;F', strtotime($req->holFrom  ));
+                $req->holTo   = "<strong>".$dates['weekdays'][date('N', strtotime($req->holTo   ))]." ".$req->holFromTime."</strong><br>".date('d&\n\b\s\p;F', strtotime($req->holTo    ));
                 $requser = $users->getWhere(['userID' => $req->userID]);
                 if($requser->connID->affected_rows == 1){$req->user = $requser->getRow();}
                 else{$req->user = "Error";}
             }
 
-
             $data['weekreq'] = $weekreq;
-
-
-
 
             //roffy_pre($weekreq);
 
             $output['html'] = view('ajaxrenders/holiday/holiday-list-week', $data);
+
+            $output["data"] = $data;
 
         }while(FALSE);
 
@@ -282,7 +289,7 @@ class Holiday extends BaseController{
             // Get user's requested holidays
             $holidays = $db->table('holidayrequests');
             $holidays = $holidays->getWhere(['userID' => $userID]);
-            if($holidays->connID->affected_rows == 0){$output['error'] = ms_error(1);break;}
+            if($holidays->connID->affected_rows == 0){$output['error'] = ms_error(5);break;}
             //$holidays = $holidays->getRow();
 
             // Loop through requests
@@ -313,7 +320,6 @@ class Holiday extends BaseController{
 
 
 
-
         }while(FALSE);
 
         // Return Output
@@ -335,35 +341,24 @@ class Holiday extends BaseController{
         // Count number of days
         $post['holTo'] = date("Y-m-d", strtotime($post['holTo']));
         $post['holFrom'] = date("Y-m-d", strtotime($post['holFrom']));
-        $date1 = date_create($post['holTo']);
-        $date2 = date_create($post['holFrom']);
+        $date1 = date_create($post['holFrom']);
+        $date2 = date_create($post['holTo']);
 
         $datediff = date_diff($date1, $date2);
-        $datediff = $datediff->days;
+        $datediff = $datediff->days + 1;
 
-        if($datediff == 0){
-            if($post['holFromTime'] == 'AM' && $post['holToTime'] == 'PM'){
-                $post['holFromTime'] = 'AD';
-                $post['holToTime'] = 'AD';
-            }
-
-            if($post['holFromTime'] == 'AD' && $post['holToTime'] == 'AD'){
-                $datediff = $datediff + 1;
-                $datediff = $datediff - 1;
-            }
-            elseif($post['holFromTime'] == $post['holToTime']){
-                $datediff = $datediff + 0.5;
-                $datediff = $datediff - 1;
-            }
-            
-        }
-        elseif($post['holFromTime'] != 'AD' && $post['holToTime'] != 'AD'){
-            $datediff = $datediff - 1;
-        }
-        elseif($post['holFromTime'] != 'AD' || $post['holToTime'] != 'AD'){
-            $datediff = $datediff - 0.5;
-        }
+        $date1 = $date1->format("Y-m-d");
+        $date2 = $date2->format("Y-m-d");
         
+        if ($post["holFromTime"] != "AD"){
+            $datediff -= 0.5;
+        }
+
+        if ($datediff > 0 && $post["holToTime"] != "AD"){
+            $datediff -= 0.5;
+        }
+
+        $datediff -= countWeekends($date1, $date2);
 
         do{
             // Check Session

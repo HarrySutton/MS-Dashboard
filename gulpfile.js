@@ -19,16 +19,16 @@ var cssout  = "public/library/css/";
 var gulp    = require('gulp');
 var fs      = require('fs');
 var gap     = require('gulp-append-prepend');
-var sass    = require('gulp-sass');
+var sass    = require('gulp-sass')(require('sass'));
 var clean   = require('gulp-clean');
 var concat  = require('gulp-concat');
 var minify  = require('gulp-minify');
 
 // SCSS
 gulp.task('sass', function(){
-    return gulp.src('dev/custom_style.scss')
+    return gulp.src(cssdev)
     .pipe(sass())
-    .pipe(gulp.dest('public/library/css'))
+    .pipe(gulp.dest(cssout))
 });
 
 // REMOVE SCRIPT FILE
@@ -51,7 +51,7 @@ gulp.task('finish-script', function(){
 
 // CONCATINATE SCRIPTS
 gulp.task('concat-scripts', function(){
-    return gulp.src(['dev/js/initial_script.js', 'dev/js/*.js'])
+    return gulp.src([jsdevi, jsdev])
     .pipe(concat('script.js'))
     .pipe(gulp.dest('dev/'));
 });
@@ -60,7 +60,7 @@ gulp.task('concat-scripts', function(){
 gulp.task('compress-scripts', function(){
     return gulp.src(['dev/script.js'])
       .pipe(minify())
-      .pipe(gulp.dest('public/library/js'))
+      .pipe(gulp.dest(jsout))
 });
 
 gulp.task('watch', function(){

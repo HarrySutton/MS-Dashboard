@@ -43,6 +43,9 @@
                             if($hol['time'] != 'AD'){
                                 $class = 'active '.strtolower($hol['time']);
                             }
+                            elseif (isWeekend(implode("-", array($hol['day'], $hol['month'], $hol['year'])))){
+                                $class = "active weekend";
+                            }
                             else{
                                 $class = 'active';
                             }

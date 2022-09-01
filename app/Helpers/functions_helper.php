@@ -31,14 +31,23 @@
                     else{
                         return false;
                     }
-                }
-                else{
+                }else{
                     return true;
                 }
-            }
-            else{
+            }else{
                 return FALSE;
             }
+
+            // if(!$session->get('logged_in')){
+            //     return FALSE;
+            // }
+            // if(!isset($permiss)){
+            //     return true;
+            // }
+            // if(!$permiss <= $session->get('userPermiss')){
+            //     return false;
+            // }
+            // return true;
         }
     }
 
@@ -132,9 +141,9 @@
                 <body>
                     <span class='body'>
                         <h3>Milestone Dashboard Notification</h3>
-                        <p>Message:</p>
-                        ".$message."
-                        <b>Note:</b> This is an automated email sent by the <a href='". base_url() ."'>Milestone Dashboard</a>, please do not reply.<br/><br/>
+                        <p>Message:</p>".
+                        $message
+                        ."<b>Note:</b> This is an automated email sent by the <a href='". base_url() ."'>Milestone Dashboard</a>, please do not reply.<br/><br/>
                     </span>
                     <p>
                         <span class='signature'>
@@ -168,6 +177,32 @@
             mail($to,$subject,$emailmessage,$headers);
         }
     }
+
+    // FINDS IF THE GIVEN DATE IS ON A WEEKEND
+    if(!function_exists("isWeekend")){
+        function isWeekend($date)
+        {
+            return date("N", strtotime($date)) >= 6;
+        }
+    }
+
+    // FINDS NUMBER OF SAYS THAT ARE WEEKENDS BETWEEN 2 GIVEN DATES
+    if(!function_exists("countWeekends")){
+        function countWeekends($from, $to)
+        {
+            $current = $from;
+            $count = 0;
+
+            while (strtotime($current) < strtotime($to)){
+                if (isWeekend($current)){
+                    $count += 1;
+                };
+                $current = date("Y-m-d", strtotime($current) + 60*60*24);
+            };
+            return $count;
+        }
+    }
+
 
 // Roffy Pre
     if(!function_exists('roffy_pre')){

@@ -204,12 +204,12 @@ class Admin extends BaseController{
 
 			// Update in Database
 			$db_data = array(
-				'userName' => $post['username'],
-				'userForename' => $post['forename'],
-				'userSurname' => $post['surname'],
-				'userEmail' => $post['email'],
-				'userActive' => $post['enabled'],
-				'userPermiss' => $post['admin'],
+				'userName' 		=> $post['username'],
+				'userForename' 	=> $post['forename'],
+				'userSurname' 	=> $post['surname'],
+				'userEmail' 	=> $post['email'],
+				'userActive' 	=> $post['enabled'],
+				'userPermiss' 	=> $post['admin'],
 			);
 			$users->where('userID', $post['userID']);
 			$users->update($db_data);

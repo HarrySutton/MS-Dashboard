@@ -158,7 +158,7 @@
             'holToTime'     => $post['holToTime'],
             'holRef'        => $post['holRef'],
             'holStatus'     => 'pending',
-            'holDays'       => $datediff+1
+            'holDays'       => $datediff
         ];
         
         $db->table('holidayrequests')->insert($data);
